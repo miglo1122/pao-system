@@ -1,0 +1,5 @@
+build/
+out/
+*.so
+__pycache__/
+*.db

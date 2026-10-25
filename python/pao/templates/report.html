@@ -1,0 +1,59 @@
+<title>Звіт PAO Осінь-2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Звіт наглядача: заголовок, показники, часова шкала, мережевий ризик, калібрування, акти */
+:root{--bg:#eef1f4;--surface:#fff;--sunk:#f6f8fa;--ink:#14202b;--muted:#5a6773;--line:#d5dce3;--accent:#1f4f7a;--signal:#cf5a1e;
+--t0:#9aa6b1;--t1:#2f6fb0;--t2:#c89211;--t3:#d0621c;--t4:#c0302b;--ok:#2e8a57;
+--f-display:"Unbounded","Golos Text",system-ui,sans-serif;--f-body:"Golos Text",system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141a;--surface:#16202a;--sunk:#111a22;--ink:#e4eaef;--muted:#93a2ae;--line:#27333f;--accent:#86b4e2;--signal:#f08a4b;
+--t0:#6c7a87;--t1:#6aa6e6;--t2:#e0b13c;--t3:#f08a4b;--t4:#f06a62;--ok:#5cc489;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e141a;--surface:#16202a;--sunk:#111a22;--ink:#e4eaef;--muted:#93a2ae;--line:#27333f;--accent:#86b4e2;--signal:#f08a4b;
+--t0:#6c7a87;--t1:#6aa6e6;--t2:#e0b13c;--t3:#f08a4b;--t4:#f06a62;--ok:#5cc489;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1{font-family:var(--f-display);font-size:22px;margin:0;text-wrap:balance} h2{font-size:17px;margin:0 0 4px} p{margin:0;max-width:72ch}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.sub{font-size:12px;color:var(--muted)}
+section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{display:flex;flex-direction:column;gap:2px;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.kpi .n{font-size:22px;font-weight:600}
+svg{width:100%;height:auto;display:block} svg .grid{stroke:var(--line)} svg .ax{fill:var(--muted);font-size:11px;font-family:var(--f-mono)}
+svg .inc{stroke:var(--ink);stroke-dasharray:3 3;opacity:.55} svg .inc-l{fill:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)} .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.tablewrap{overflow-x:auto} table{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:7px 8px;border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top} td.late{color:var(--t4);font-weight:600} td.ok{color:var(--ok)}
+.bars{display:grid;grid-template-columns:minmax(0,15em) minmax(0,1fr) 4.5em;gap:4px 12px;align-items:center;font-size:13px}
+.b-track{height:10px;background:var(--sunk);border:1px solid var(--line);border-radius:5px;position:relative} .b-track i{position:absolute;inset:0 auto 0 0;border-radius:5px}
+.b-val{text-align:right} .b-note{grid-column:1/-1;font-size:12px;color:var(--muted);margin:-2px 0 6px}
+@media (max-width:620px){.bars{grid-template-columns:minmax(0,1fr) 4.5em} .b-track{grid-column:1/-1;grid-row:auto}}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:1px 9px;border:1px solid var(--c);color:var(--c);white-space:nowrap}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px} @media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
+footer{font-size:12px;color:var(--muted);max-width:80ch}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:6px">
+ <span class="label">Звіт наглядача · сценарій «Осінь-2026» · ${period}</span>
+ <h1>Проактивний адміністративний нагляд за транспортно-логістичними хабами</h1>
+ <p class="sub">Сформовано ${generated}. Ядро C++17 (${backend}), ${eps} подій/с. Дані демонстраційні, назви суб'єктів вигадані.</p>
+</header>
+<div class="kpis">${kpis}</div>
+<section><h2>Рівні нагляду щодня</h2><p class="sub">Кожен стовпець — 14 суб'єктів реєстру. Пунктир — початок інциденту (номер унизу). Точка зверху — суб'єкти в терміновій процедурі.</p>
+ <div class="tablewrap">${timeline}</div><div class="legend">${legend}</div></section>
+<section><h2>Інциденти та годинник звітування NIS2</h2><p class="sub">Раннє попередження — 24 год, повідомлення — 72 год, остаточний звіт — 1 місяць (ст. 23).</p>
+ <div class="tablewrap"><table><thead><tr><th>№</th><th>Суб'єкт</th><th>Постачальник</th><th>24 год</th><th>72 год</th><th>1 місяць</th></tr></thead><tbody>${incidents}</tbody></table></div></section>
+<div class="two">
+<section><h2>Системні точки відмови</h2><p class="sub">Очікувані зважені втрати, якщо атака почнеться з цього вузла. ${sims} симуляцій Монте-Карло за ${csec} с; середній системний ризик ${systemic}.</p>${cascade}</section>
+<section><h2>Куди спрямувати наступний аудит</h2><p class="sub">Зниження системного ризику мережі, якщо зрілість контролів суб'єкта зросте на 0,20.</p>${mitigation}</section>
+</div>
+<section><h2>Калібрування ваг індексу за результатами аудитів</h2>${calib}</section>
+<section><h2>Стан реєстру на кінець періоду</h2><div class="tablewrap"><table><thead><tr><th>Суб'єкт</th><th>Клас</th><th>DCRI</th><th>Рівень</th><th>E / M</th><th>Аудити: підтв. / ні</th></tr></thead><tbody>${final}</tbody></table></div></section>
+<section><h2>Проєкти адміністративних актів</h2><p class="sub">Сформовано ${n_acts}; показано перші 40. Ескалацій ${tr_esc}, аудитів ${tr_aud}, із них не підтвердили порушень ${tr_clr}.</p>
+ <div class="tablewrap"><table><thead><tr><th>№</th><th>Дата</th><th>Адресат</th><th>Вид акта</th><th>Строк</th><th>Перевірка людиною</th></tr></thead><tbody>${acts}</tbody></table></div></section>
+<footer>Модель PAO: індекс лише впорядковує увагу наглядача (ст. 31 NIS2); обов'язкові акти рівнів 3–4 і тимчасові заходи потребують перевірки доказів посадовою особою; результати аудитів повертаються в калібрування. Пороги, ваги й імовірності модельні.</footer>
+</div>

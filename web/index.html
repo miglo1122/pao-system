@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Панель PAO</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#eef1f4;--surface:#fff;--sunk:#f6f8fa;--ink:#14202b;--muted:#5a6773;--line:#d5dce3;--accent:#1f4f7a;--signal:#cf5a1e;
+--t0:#7b8794;--t1:#2f6fb0;--t2:#b98206;--t3:#d0621c;--t4:#c0302b;--ok:#2e8a57;
+--f-display:"Unbounded","Golos Text",system-ui,sans-serif;--f-body:"Golos Text",system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0e141a;--surface:#16202a;--sunk:#111a22;--ink:#e4eaef;--muted:#93a2ae;--line:#27333f;--accent:#86b4e2;--signal:#f08a4b;
+--t0:#8796a3;--t1:#6aa6e6;--t2:#e0b13c;--t3:#f08a4b;--t4:#f06a62;--ok:#5cc489;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--f-body);padding:16px}
+.wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-family:var(--f-display);font-size:19px;margin:0} h2{font-size:15px;margin:0}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)} .sub{font-size:12px;color:var(--muted)}
+header{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 10px}
+button:hover{border-color:var(--accent)} button.primary{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:600}
+input,select{background:var(--sunk);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-width:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.time{font-family:var(--f-mono);font-weight:600;background:var(--sunk);border:1px solid var(--line);border-radius:6px;padding:5px 10px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:980px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+@media (max-width:700px){.strip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:8px;padding:8px 12px}
+.tile .n{font-family:var(--f-mono);font-size:22px;font-weight:600}
+.tw{overflow-x:auto} table{border-collapse:collapse;width:100%;min-width:600px;font-size:13px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.bar{height:8px;border-radius:4px;background:var(--sunk);border:1px solid var(--line);position:relative;min-width:60px}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--c)}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:1px 9px;background:var(--c);color:var(--surface);white-space:nowrap}
+.pill.o{background:none;border:1px solid var(--c);color:var(--c)}
+.feed{list-style:none;margin:0;padding:0;max-height:430px;overflow:auto;display:flex;flex-direction:column}
+.feed li{border-left:3px solid var(--c);padding:6px 10px;border-bottom:1px solid var(--line);font-size:13px}
+form.inc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+form.inc .full{grid-column:1/-1}
+@media (max-width:560px){form.inc{grid-template-columns:minmax(0,1fr)}}
+.casc{display:grid;grid-template-columns:minmax(0,14em) minmax(0,1fr) 4em;gap:6px 10px;align-items:center;font-size:13px}
+.err{color:var(--t4);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div><h1>Панель PAO</h1><div class="sub">Проактивний адміністративний нагляд · транспорт і логістика · NIS2 · ядро <span id="backend">…</span></div></div>
+ <div class="row"><span class="label">Час системи</span><span class="time" id="now">—</span>
+  <button data-adv="6">+6 год</button><button data-adv="24">+24 год</button><button data-adv="72">+3 дні</button></div>
+</header>
+<section class="strip" id="strip"></section>
+<div class="grid">
+ <section class="panel"><div class="row" style="justify-content:space-between"><h2>Реєстр суб'єктів</h2><span class="sub">оновлюється кожні 3 с</span></div>
+  <div class="tw"><table><thead><tr><th>Суб'єкт</th><th>Хаб</th><th>DCRI</th><th>Рівень</th><th>Причини</th></tr></thead><tbody id="ents"></tbody></table></div></section>
+ <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+  <section class="panel"><h2>Зареєструвати інцидент</h2>
+   <form class="inc" id="incForm">
+    <label class="full"><span class="label">Суб'єкт</span><br><select id="fEnt" style="width:100%"></select></label>
+    <label class="full"><span class="label">Опис</span><br><input id="fTitle" style="width:100%" value="DDoS на портал бронювання вантажних слотів"></label>
+    <label class="full"><span class="label">Постачальник</span><br><select id="fSup" style="width:100%"></select></label>
+    <label><input type="checkbox" id="fHub"> вплив на хаб</label>
+    <label><input type="checkbox" id="fEarly" checked> раннє попередження подано</label>
+    <button class="primary full" type="submit">Надіслати в ядро</button>
+    <div class="err full" id="incErr" hidden></div>
+   </form></section>
+  <section class="panel"><h2>Потік рішень ядра</h2><ul class="feed" id="feed"></ul></section>
+ </div>
+</div>
+<div class="grid">
+ <section class="panel"><div class="row" style="justify-content:space-between"><h2>Проєкти актів на перевірку</h2><input id="reviewer" placeholder="Посадова особа (ПІБ)" style="width:16em"></div>
+  <div class="tw"><table><thead><tr><th>№</th><th>Адресат</th><th>Вид</th><th>Строк</th><th>Статус</th><th></th></tr></thead><tbody id="acts"></tbody></table></div>
+  <div class="err" id="actErr" hidden></div></section>
+ <section class="panel"><div class="row" style="justify-content:space-between"><h2>Каскадні атаки</h2><button id="runCasc">Змоделювати</button></div>
+  <div class="sub" id="cascInfo">Монте-Карло по графу постачальників і хабів на поточних даних.</div><div class="casc" id="casc"></div></section>
+</div>
+</div>
+<script>
+const TC=['--t0','--t1','--t2','--t3','--t4'],TN=['Р0','Р1','Р2','Р3','Р4'],TL=['Рекомендація','Запит','Аудит','Вимога','Примус'];
+const DT={baseline:'Базовий рівень',escalation:'Ескалація',deescalation:'Деескалація',urgent_open:'Термінова процедура',urgent_close:'Термінову процедуру завершено',
+ deadline_breach:'Порушено строк звітування',incident_registered:'Інцидент зареєстровано',report_received:'Отримано звіт',audit_feedback:'Результат аудиту',rejected_event:'Подію відхилено',late_event:'Запізніла подія'};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=t=>new Date(t*1000).toLocaleString('uk-UA',{timeZone:'Europe/Kyiv',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+const $=s=>document.querySelector(s);
+let S=null,names={};
+async function api(p,b){const r=await fetch(p,b===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j;}
+function color(d){if(d.type==='urgent_open'||d.type==='deadline_breach')return 'var(--signal)';if(d.type==='escalation')return `var(${TC[d.to]})`;if(d.type==='rejected_event')return 'var(--t4)';return 'var(--line)';}
+function describe(d){let s=DT[d.type]||d.type;if(d.from!==undefined)s+=` ${TN[d.from]} → ${TN[d.to]} (індекс ${d.score})`;if(d.incident)s+=` · ${d.incident}`;if(d.stage_name)s+=` · ${d.stage_name}`;if(d.reason)s+=` · ${d.reason}`;return s;}
+async function refresh(){
+ try{
+ S=await api('/api/snapshot');names={};S.entities.forEach(e=>names[e.id]=e.name);
+ $('#now').textContent=fmt(S.now);
+ const c=[0,0,0,0,0];let u=0;S.entities.forEach(e=>{c[e.assessment.tier]++;if(e.urgent)u++;});
+ $('#strip').innerHTML=c.map((n,i)=>`<div class="tile" style="--c:var(${TC[i]})"><span class="label">${TN[i]} ${TL[i]}</span><div class="n">${n}</div></div>`).join('')+`<div class="tile" style="--c:var(--signal)"><span class="label">Терміново</span><div class="n">${u}</div></div>`;
+ const hubs={};S.hubs.forEach(h=>hubs[h.id]=h.name);
+ $('#ents').innerHTML=S.entities.slice().sort((a,b)=>b.assessment.score-a.assessment.score).map(e=>{const a=e.assessment;
+  return `<tr><td><b>${esc(e.name)}</b><div class="sub">${esc(e.kind)} · ${e.class==='essential'?'суттєвий':'важливий'}</div></td><td class="sub">${esc(hubs[e.hub])}</td>
+  <td><div class="row" style="--c:var(${TC[a.tier]});flex-wrap:nowrap"><b class="num">${a.score}</b><div class="bar" style="flex:1"><i style="width:${a.score}%"></i></div></div></td>
+  <td><span class="pill" style="--c:var(${TC[a.tier]})">${TN[a.tier]}</span> ${e.urgent?'<span class="pill o" style="--c:var(--signal)">Т</span>':''}</td>
+  <td class="sub">${esc(a.reasons.slice(1).concat(a.urgent_reasons).join('; ')||'—')}</td></tr>`;}).join('');
+ if(!$('#fEnt').options.length){$('#fEnt').innerHTML=S.entities.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join('');sup();}
+ const f=await api('/api/decisions?limit=80');
+ $('#feed').innerHTML=f.filter(d=>d.type!=='baseline').map(d=>`<li style="--c:${color(d)}"><span class="mono sub">${fmt(d.t)}</span> <b>${esc(names[d.entity]||'')}</b><br>${esc(describe(d))}</li>`).join('')||'<li class="sub">Рішень ще немає.</li>';
+ const acts=await api('/api/acts');
+ $('#acts').innerHTML=acts.slice(0,30).map(a=>`<tr><td class="mono">${esc(a.number)}</td><td>${esc(names[a.entity_id])}</td><td>${esc(a.kind)}${a.requires_human_review?' <span class="pill o" style="--c:var(--signal)">перевірка людиною</span>':''}</td>
+  <td class="mono">${fmt(a.deadline)}</td><td>${a.status==='approved'?'затверджено'+(a.reviewer?' · '+esc(a.reviewer):''):a.status==='rejected'?'відхилено':'проєкт'}</td>
+  <td>${a.status==='draft'?`<button data-ap="${esc(a.number)}">Затвердити</button> <button data-rj="${esc(a.number)}">Відхилити</button>`:''}</td></tr>`).join('')||'<tr><td colspan="6" class="sub">Актів ще немає.</td></tr>';
+ }catch(e){console.error(e)}
+}
+function sup(){const e=S.entities.find(x=>x.id===$('#fEnt').value);$('#fSup').innerHTML='<option value="">не встановлено</option>'+e.suppliers.map(s=>`<option>${esc(s)}</option>`).join('');}
+document.addEventListener('change',e=>{if(e.target.id==='fEnt')sup();});
+document.addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.adv){await api('/api/events',{type:'tick',t:S.now+b.dataset.adv*3600});refresh();}
+ if(b.dataset.ap||b.dataset.rj){$('#actErr').hidden=true;try{await api(`/api/acts/${encodeURIComponent(b.dataset.ap||b.dataset.rj)}/status`,{status:b.dataset.ap?'approved':'rejected',reviewer:$('#reviewer').value});refresh();}catch(err){$('#actErr').textContent=err.message;$('#actErr').hidden=false;}}
+ if(b.id==='runCasc'){b.disabled=true;$('#cascInfo').textContent='Моделювання…';const r=await api('/api/cascade?runs=20000');b.disabled=false;
+  $('#cascInfo').textContent=`${r.simulations.toLocaleString('uk-UA')} симуляцій за ${r.seconds.toFixed(2)} с. Очікувані зважені втрати від атаки, що починається з вузла.`;
+  const m=r.seeds[0].expected_impact;$('#casc').innerHTML=r.seeds.slice(0,10).map(s=>`<span>${esc(s.label)}${s.type==='supplier'?' <span class="sub">постачальник</span>':''}</span><div class="bar" style="--c:var(--accent)"><i style="width:${100*s.expected_impact/m}%"></i></div><span class="num">${s.expected_impact.toFixed(2)}</span>`).join('');}
+});
+$('#incForm').addEventListener('submit',async e=>{e.preventDefault();$('#incErr').hidden=true;
+ try{await api('/api/events',{type:'incident',id:'WEB-'+Date.now().toString(36).toUpperCase(),entity:$('#fEnt').value,title:$('#fTitle').value,supplier:$('#fSup').value,significant:true,hub_wide:$('#fHub').checked,early_warning:$('#fEarly').checked});refresh();}
+ catch(err){$('#incErr').textContent=err.message;$('#incErr').hidden=false;}});
+api('/api/health').then(h=>$('#backend').textContent=h.backend);
+refresh();setInterval(refresh,3000);
+</script>
+</body>
+</html>

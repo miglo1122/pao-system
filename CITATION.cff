@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "Якщо ви використовуєте це програмне забезпечення, будь ласка, цитуйте його так."
+title: "PAO: система проактивного адміністративного нагляду за кібербезпекою транспортних мереж і логістичних хабів"
+version: 1.0.0
+date-released: 2026-10-25
+license: MIT
+authors:
+  - family-names: "[Kuliush"
+    given-names: "[Denis]"
+    affiliation: "[Kharkiv National University of Internal Affairs]"
+keywords:
+  - NIS2
+  - cyber-resilience
+  - critical infrastructure
+  - administrative oversight
+  - transport
+  - logistics
+preferred-citation:
+  type: article
+  title: "Cyber-Resilience of Critical Transport Infrastructure: Re-engineering Administrative Oversight Models Under EU NIS2 Standards"
+  authors:
+    - family-names: "[Прізвище]"
+      given-names: "[Ім'я]"
+  journal: "Lex Portus"
+  year: 2026

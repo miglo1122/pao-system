@@ -1,0 +1,264 @@
+{
+  "events": 1821,
+  "decisions": 133,
+  "acts": 46,
+  "audits_main_run": 18,
+  "transparency": {
+    "escalations": 33,
+    "urgent_procedures": 13,
+    "reporting_breaches": 4,
+    "audits": 18,
+    "audits_cleared": 4,
+    "acts_human_review": 17
+  },
+  "calibration": {
+    "status": "ok",
+    "n": 756,
+    "confirmed": 435,
+    "precision": 0.5753968253968254,
+    "features": [
+      "E",
+      "T",
+      "1-M",
+      "H"
+    ],
+    "coefficients": [
+      0.32256959277885844,
+      0.08899416663778723,
+      0.537545943951534,
+      -0.01663867085228458
+    ],
+    "current_weights": [
+      0.3,
+      0.25,
+      0.3,
+      0.15
+    ],
+    "suggested_weights": [
+      0.33986544614824876,
+      0.09376594330662376,
+      0.5663686105451274,
+      0.0
+    ],
+    "ci90_low": [
+      0.26688739672159345,
+      0.007473956706419032,
+      0.4724523825128254,
+      0.0
+    ],
+    "ci90_high": [
+      0.4112440826001126,
+      0.15805482465123513,
+      0.6390440157295054,
+      0.07995459473142069
+    ],
+    "auc_current": 0.6926844988720593,
+    "auc_suggested": 0.7326386650911304,
+    "message": "Частка підтверджених ескалацій 58%. Дані аудитів радять збільшити вагу «незрілість контролів» і зменшити вагу «загроза». Загроза визначає пріоритет уваги, але слабко передбачає порушення конкретним суб'єктом; її доцільно використовувати для термінової процедури, а не для санкцій."
+  },
+  "cascade_top": [
+    {
+      "expected_affected": 1.5535,
+      "expected_hubs_disrupted": 1.03115,
+      "expected_impact": 1.493495,
+      "hubs_reached": 3,
+      "label": "Адміністрація порту «Дунай-Схід»",
+      "node": "p3",
+      "p_hub_disruption": 1,
+      "top_affected": [
+        {
+          "entity": "r3",
+          "p": 0.23955
+        },
+        {
+          "entity": "v1",
+          "p": 0.0866
+        },
+        {
+          "entity": "s1",
+          "p": 0.06975
+        },
+        {
+          "entity": "f1",
+          "p": 0.0513
+        },
+        {
+          "entity": "t1",
+          "p": 0.0375
+        }
+      ],
+      "type": "entity"
+    },
+    {
+      "expected_affected": 1.56635,
+      "expected_hubs_disrupted": 1.0072,
+      "expected_impact": 1.48003,
+      "hubs_reached": 3,
+      "label": "Сухий порт «Західна брама»",
+      "node": "r2",
+      "p_hub_disruption": 1,
+      "top_affected": [
+        {
+          "entity": "t1",
+          "p": 0.19305
+        },
+        {
+          "entity": "w1",
+          "p": 0.1809
+        },
+        {
+          "entity": "b1",
+          "p": 0.085
+        },
+        {
+          "entity": "r3",
+          "p": 0.0433
+        },
+        {
+          "entity": "f1",
+          "p": 0.0416
+        }
+      ],
+      "type": "entity"
+    },
+    {
+      "expected_affected": 1.4473,
+      "expected_hubs_disrupted": 1.0221,
+      "expected_impact": 1.416865,
+      "hubs_reached": 3,
+      "label": "Адміністрація порту «Південна гавань»",
+      "node": "p1",
+      "p_hub_disruption": 1,
+      "top_affected": [
+        {
+          "entity": "f1",
+          "p": 0.2385
+        },
+        {
+          "entity": "p2",
+          "p": 0.0382
+        },
+        {
+          "entity": "t1",
+          "p": 0.03725
+        },
+        {
+          "entity": "b1",
+          "p": 0.0315
+        },
+        {
+          "entity": "r1",
+          "p": 0.02025
+        }
+      ],
+      "type": "entity"
+    },
+    {
+      "expected_affected": 1.3045,
+      "expected_hubs_disrupted": 0.05765,
+      "expected_impact": 1.220645,
+      "hubs_reached": 3,
+      "label": "Оператор «Магістраль»",
+      "node": "r1",
+      "p_hub_disruption": 0.05445,
+      "top_affected": [
+        {
+          "entity": "f1",
+          "p": 0.12115
+        },
+        {
+          "entity": "r3",
+          "p": 0.04455
+        },
+        {
+          "entity": "t1",
+          "p": 0.03525
+        },
+        {
+          "entity": "p1",
+          "p": 0.0264
+        },
+        {
+          "entity": "b1",
+          "p": 0.01875
+        }
+      ],
+      "type": "entity"
+    },
+    {
+      "expected_affected": 1.2832,
+      "expected_hubs_disrupted": 0.18845,
+      "expected_impact": 1.197325,
+      "hubs_reached": 3,
+      "label": "Пункт пропуску «Карпатський»",
+      "node": "b1",
+      "p_hub_disruption": 0.1814,
+      "top_affected": [
+        {
+          "entity": "t1",
+          "p": 0.1094
+        },
+        {
+          "entity": "w1",
+          "p": 0.06845
+        },
+        {
+          "entity": "f1",
+          "p": 0.03935
+        },
+        {
+          "entity": "r2",
+          "p": 0.0184
+        },
+        {
+          "entity": "p1",
+          "p": 0.0155
+        }
+      ],
+      "type": "entity"
+    }
+  ],
+  "mitigation_top": [
+    {
+      "entity": "b1",
+      "name": "Пункт пропуску «Карпатський»",
+      "reduction": 0.026856,
+      "reduction_pct": 3.274328,
+      "risk_after": 0.793349,
+      "risk_before": 0.820205
+    },
+    {
+      "entity": "p1",
+      "name": "Адміністрація порту «Південна гавань»",
+      "reduction": 0.021819,
+      "reduction_pct": 2.660195,
+      "risk_after": 0.798386,
+      "risk_before": 0.820205
+    },
+    {
+      "entity": "v1",
+      "name": "Служба руху суден «Дунай-VTS»",
+      "reduction": 0.021677,
+      "reduction_pct": 2.642894,
+      "risk_after": 0.798528,
+      "risk_before": 0.820205
+    },
+    {
+      "entity": "f1",
+      "name": "«Морський Брокер»",
+      "reduction": 0.015422,
+      "reduction_pct": 1.880251,
+      "risk_after": 0.804783,
+      "risk_before": 0.820205
+    },
+    {
+      "entity": "r2",
+      "name": "Сухий порт «Західна брама»",
+      "reduction": 0.013396,
+      "reduction_pct": 1.633274,
+      "risk_after": 0.806809,
+      "risk_before": 0.820205
+    }
+  ],
+  "differential_errors": []
+}
